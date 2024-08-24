@@ -22,7 +22,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int pk;
 
     @NotNull(message = "name is null")
     private String name;

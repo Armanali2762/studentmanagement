@@ -54,6 +54,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         bottom: 0;
         z-index: 9999;
         padding: 20px;
+        overflow-y: auto;
       }
 
       /* Modal styles */
@@ -107,7 +108,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         background-color: #f2f2f2;
       }
 
-      .markTable input[type="text"] {
+      .markTable input[type="number"] {
         width: 100%;
         padding: 8px;
         box-sizing: border-box;
@@ -116,7 +117,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
       }
 
-      .markTable input[type="text"]:focus {
+      .markTable input[type="number"]:focus {
         outline: none;
         border-color: #007bff;
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
@@ -125,6 +126,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   </head>
 
   <body>
+
     <!--Edit Student Modal-->
     <div id="editStudentModal" class="modal">
       <div class="modal-content" id="content">
@@ -404,34 +406,38 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
                   <tr id="tRow">
                     <td>
                       <input
-                        type="text"
+                        type="number"
                         name="math0"
                         id="mathmarks"
                         placeholder="enter math marks"
+                        required
                       />
                     </td>
                     <td>
                       <input
-                        type="text"
+                        type="number"
                         name="science0"
                         id="sciencemarks"
                         placeholder="enter science marks"
+                        required
                       />
                     </td>
                     <td>
                       <input
-                        type="text"
+                        type="number"
                         name="english0"
                         id="englishmarks"
                         placeholder="enter english marks"
+                        required
                       />
                     </td>
                     <td>
                       <input
-                        type="text"
+                        type="number"
                         name="hindi0"
                         id="hindimarks"
                         placeholder="enter hindi marks"
+                        required
                       />
                     </td>
                     <td>
@@ -452,7 +458,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         </div>
       </div>
       <!-- Student Data Table -->
-      <div class="mt-1">
+      <!-- <div class="mt-1">
         <table
           id="dataTable"
           class="table table-striped table-bordered"
@@ -474,10 +480,39 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
           </thead>
           <tbody></tbody>
         </table>
+      </div> -->
+
+      
+      <div class="table-container">
+        <table id="datatable" class="box table table-hover table-condensed table-bordered" cellspacing="0">
+          <thead id="header">
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div>
     </div>
 
+    <script src="${pageContext.request.contextPath}/javascript/Pagination.js"></script>
     <script>
+
+    url = "pagination/data/" + 1;
+		var buttonsParam = {
+			list: {
+				link: "company-bank-details-list"
+			},
+			file: {
+				name: "Company Bank Details List"
+			},
+			ajaxDaata: {
+				value: 1,
+				topHeaderUrl: 'pagination/table-header/'+1,
+				actUrl1: 'pagination/header/'+1,      
+				dataUrl: url
+			}
+		};
+		loadDTAjaxV2(buttonsParam);
+    
       function addRow() {
         var maxrow = 3;
         var currentRow = $("#tBody tr").length;
@@ -706,7 +741,18 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         var city = document.getElementById("city").value;
         var address = document.getElementById("address").value.trim();
 
-        // Validate Name
+        var mathmarks = document.getElementById("mathmarks");
+        var sciencemarks = document.getAnimations("sciencemarks");
+        var englishmarks = document.getElementById("englishmarks");
+        var hindimarks = document.getElementById("hindimarks");
+
+        //Validate Marks
+        if(mathmarks && sciencemarks && englishmarks && hindimarks > 100 || mathmarks && sciencemarks && englishmarks && hindimarks < 0 ){
+          alert("Please enter correct marks")
+          return false;
+        }
+
+        // Validate NameS
         if (name === "") {
           alert("Please enter a name.");
           return false;
@@ -751,6 +797,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         // Form validation successful
         return true;
       }
+      
     </script>
+    
   </body>
 </html>

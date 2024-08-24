@@ -19,7 +19,7 @@ public class StudentMarks {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private Integer pk;
 	private String math;
 	private String science;
 	private String english;

@@ -7,7 +7,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +46,7 @@ public class StudentController {
 	// @PostConstruct
 	// public void initDB() {
 	// List<Student> students = IntStream.rangeClosed(1, 200)
-	// .mapToObj(i -> new Student(new Random().nextInt(100),"student"+i, "male",
+	// .mapToObj(i -> new Student(new Random().nextInt(100), "student" + i, "male",
 	// "Computer Science", "China", "Beijing", "Chaoyang", "India"))
 	// .collect(Collectors.toList());
 	// this.studentRespository.saveAll(students);
